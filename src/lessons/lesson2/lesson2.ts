@@ -209,7 +209,6 @@ console.log('lesson 2')
 
 // не рекурсивное упрощение с использованием стека
 // function flat(arr: any) {
-//   debugger
 //   const stack = [...arr]
 //   const result = []
 //
