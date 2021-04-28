@@ -54,6 +54,46 @@ console.log('lesson 4')
 // свойства resolve и reject получают ссылки на соответствующие функции
 // resolve и reject. Следующие два обработчика запускают методы resolve и reject.
 
+type HandlePromiseType = {
+  promise: null | Promise<any>
+  resolve: null | Function
+  reject: null | Function
+  onSuccess: (param: string | unknown) => void
+  onError: (param: string | unknown) => void
+}
+
+const handlePromise: HandlePromiseType = {
+  promise: null,
+  resolve: null,
+  reject: null,
+  onSuccess: (param: unknown) => {
+    console.log(`Promise is resolved with data: ${param}`)
+  },
+  onError: (param: unknown) => {
+    console.log(`Promise is rejected with data: ${param}`)
+  },
+}
+
+export const createPromise = () => {
+  handlePromise.promise = new Promise((res, rej) => {
+    handlePromise.resolve = res
+    handlePromise.reject = rej
+  })
+    // .then(res => handlePromise.onSuccess(res))
+    .then(handlePromise.onSuccess)
+    // .catch(err => handlePromise.onError(err))
+    .catch(handlePromise.onError)
+}
+export const resolvePromise = () => {
+  handlePromise.resolve && handlePromise.resolve('True')
+}
+export const rejectPromise = () => {
+  handlePromise.reject && handlePromise.reject('False')
+}
+
+//@ts-ignore
+window.handlePromise = handlePromise
+
 // Task 06
 // Создайте промис, который через 1 с возвращает строку "My name is".
 // Создайте функцию onSuccess, которая получает один параметр,
@@ -80,24 +120,24 @@ console.log('lesson 4')
 // Получите результаты работы промисов, объедините свойства объектов
 // и выведите в консоль {name, age, city}
 
-const pr1 = new Promise(res =>
-  setTimeout(() => {
-    res({ name: 'Andrey' })
-  }, 2000)
-)
-const pr2 = new Promise(res =>
-  setTimeout(() => {
-    res({ age: 33 })
-  }, 3000)
-)
-const pr3 = new Promise(res =>
-  setTimeout(() => {
-    res({ city: 'Minsk' })
-  }, 4000)
-)
-Promise.all([pr1, pr2, pr3]).then(values => {
-  console.log(...values)
-})
+// const pr1 = new Promise(res =>
+//   setTimeout(() => {
+//     res({ name: 'Andrey' })
+//   }, 2000)
+// )
+// const pr2 = new Promise(res =>
+//   setTimeout(() => {
+//     res({ age: 33 })
+//   }, 3000)
+// )
+// const pr3 = new Promise(res =>
+//   setTimeout(() => {
+//     res({ city: 'Minsk' })
+//   }, 4000)
+// )
+// Promise.all([pr1, pr2, pr3]).then(values => {
+//   console.log(...values)
+// })
 
 // just a plug
 export default () => {}
