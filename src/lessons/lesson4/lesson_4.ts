@@ -54,45 +54,45 @@ console.log('lesson 4')
 // свойства resolve и reject получают ссылки на соответствующие функции
 // resolve и reject. Следующие два обработчика запускают методы resolve и reject.
 
-type HandlePromiseType = {
-  promise: null | Promise<any>
-  resolve: null | Function
-  reject: null | Function
-  onSuccess: (param: string | unknown) => void
-  onError: (param: string | unknown) => void
-}
+// type HandlePromiseType = {
+//   promise: null | Promise<any>
+//   resolve: null | Function
+//   reject: null | Function
+//   onSuccess: (param: string | unknown) => void
+//   onError: (param: string | unknown) => void
+// }
 
-const handlePromise: HandlePromiseType = {
-  promise: null,
-  resolve: null,
-  reject: null,
-  onSuccess: (param: unknown) => {
-    console.log(`Promise is resolved with data: ${param}`)
-  },
-  onError: (param: unknown) => {
-    console.log(`Promise is rejected with data: ${param}`)
-  },
-}
+// const handlePromise: HandlePromiseType = {
+//   promise: null,
+//   resolve: null,
+//   reject: null,
+//   onSuccess: (param: unknown) => {
+//     console.log(`Promise is resolved with data: ${param}`)
+//   },
+//   onError: (param: unknown) => {
+//     console.log(`Promise is rejected with data: ${param}`)
+//   },
+// }
 
-export const createPromise = () => {
-  handlePromise.promise = new Promise((res, rej) => {
-    handlePromise.resolve = res
-    handlePromise.reject = rej
-  })
-    // .then(res => handlePromise.onSuccess(res))
-    .then(handlePromise.onSuccess)
-    // .catch(err => handlePromise.onError(err))
-    .catch(handlePromise.onError)
-}
-export const resolvePromise = () => {
-  handlePromise.resolve && handlePromise.resolve('True')
-}
-export const rejectPromise = () => {
-  handlePromise.reject && handlePromise.reject('False')
-}
+// export const createPromise = () => {
+//   handlePromise.promise = new Promise((res, rej) => {
+//     handlePromise.resolve = res
+//     handlePromise.reject = rej
+//   })
+//     // .then(res => handlePromise.onSuccess(res))
+//     .then(handlePromise.onSuccess)
+//     // .catch(err => handlePromise.onError(err))
+//     .catch(handlePromise.onError)
+// }
+// export const resolvePromise = () => {
+//   handlePromise.resolve && handlePromise.resolve('True')
+// }
+// export const rejectPromise = () => {
+//   handlePromise.reject && handlePromise.reject('False')
+// }
 
-//@ts-ignore
-window.handlePromise = handlePromise
+// //@ts-ignore
+// window.handlePromise = handlePromise
 
 // Task 06
 // Создайте промис, который через 1 с возвращает строку "My name is".
@@ -139,5 +139,20 @@ window.handlePromise = handlePromise
 //   console.log(...values)
 // })
 
+// async function sleep(ms: number) {
+//   return new Promise(res => {
+//     setTimeout(() => {
+//       console.log(ms)
+//       res(ms)
+//     }, +`${ms}000`)
+//   })
+// }
+
+// async function show() {
+//   await sleep(3)
+//   await sleep(2)
+//   await sleep(1)
+// }
+// show()
 // just a plug
 export default () => {}
