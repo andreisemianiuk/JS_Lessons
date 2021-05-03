@@ -43,7 +43,6 @@ console.log('lesson 2')
 // console.log(counter2()); // 1
 // console.log(counter()); // 3
 
-
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
 // и возвращала следующий объект методов:
@@ -148,7 +147,6 @@ console.log('lesson 2')
 // console.log(army[0]()) // у 0-го стрелка будет номер 10
 // console.log(army[5]()) // и у 5-го стрелка тоже будет номер 10
 
-
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
 // и что бы корректно работали следующие вызовы:
@@ -225,23 +223,22 @@ console.log('lesson 2')
 
 // рекурсивно упрощаем массив
 
-function flat(arr: []) {
-  let flattend: [] = []
-  
-  function flatted(arr: []) {
-    arr.forEach((v) => {
-      if (Array.isArray(v)) flatted(v)
-      else flattend.push(v)
-    })
-  }
-  
-  flatted(arr)
-  return flattend
-}
+// function flat(arr: []) {
+//   let flattend: [] = []
 
-//@ts-ignore
-console.log(flat([[10, 20, [30, [8, 9, [7, [9, 8]]]]], 1, 2, [3, 4, [5, 6]]]))
+//   function flatted(arr: []) {
+//     arr.forEach((v) => {
+//       if (Array.isArray(v)) flatted(v)
+//       else flattend.push(v)
+//     })
+//   }
+
+//   flatted(arr)
+//   return flattend
+// }
+
+// //@ts-ignore
+// console.log(flat([[10, 20, [30, [8, 9, [7, [9, 8]]]]], 1, 2, [3, 4, [5, 6]]]))
 
 // just a plug
-export default () => {
-};
+export default () => {}
