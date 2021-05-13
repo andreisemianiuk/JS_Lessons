@@ -1,4 +1,4 @@
-console.log('Lesson 6');
+console.log('Lesson 6')
 
 // Class
 // https://learn.javascript.ru/classes
@@ -9,6 +9,53 @@ console.log('Lesson 6');
 
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
+
+class Student {
+  name: string
+  lastName: string
+  academicPerformance: number[]
+  constructor(name: string, lastName: string, academicPerformance: number[]) {
+    this.name = name
+    this.lastName = lastName
+    this.academicPerformance = academicPerformance
+  }
+}
+
+let student1 = new Student('Andrey', 'Semenyuk', [10, 10, 10, 10, 10])
+let student2 = new Student('Ihar', 'Luschchyk', [9, 10, 9, 10, 9])
+let student3 = new Student('Vika', 'Kushnerevich', [8, 10, 7, 10, 9])
+let student4 = new Student('Evgen', 'Ivanuyk', [8, 7, 9, 8, 8])
+let student5 = new Student('Ilya', 'Kim', [4, 5, 7, 8, 9])
+let student6 = new Student('Egor', 'Krid', [3, 3, 4, 4, 5])
+let student7 = new Student('Vasya', 'Vakulenko', [3, 4, 8, 8, 7])
+let student8 = new Student('Sergey', 'Shnurov', [2, 1, 3, 3, 2])
+let student9 = new Student('Oleg', 'Mayami', [1, 2, 1, 2, 3])
+let student10 = new Student('Viktor', 'Drobysh', [2, 3, 5, 3, 8])
+
+let students = [
+  student1,
+  student2,
+  student3,
+  student4,
+  student5,
+  student6,
+  student7,
+  student8,
+  student9,
+  student10,
+]
+
+let mostEducatedStudents = [
+  ...students.sort(
+    (a, b) =>
+      a.academicPerformance.reduce((acc, v) => acc + v) -
+      b.academicPerformance.reduce((acc, v) => acc + v)
+  ),
+]
+
+console.log(students)
+console.log(mostEducatedStudents)
+
 // Создать массив из десяти элементов такого типа, упорядочить записи по возрастанию среднего балла.
 // Добавить возможность вывода фамилий и номеров групп студентов, имеющих оценки, равные только 4 или 5.
 
@@ -36,5 +83,4 @@ console.log('Lesson 6');
 // Определить функции переназначения марки и грузоподъемности.
 
 // just a plug
-export default () => {
-};
+export default () => {}

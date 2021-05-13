@@ -1,5 +1,3 @@
-import { count } from 'console'
-
 console.log('Lesson 5')
 
 // Keyword - this
