@@ -96,19 +96,19 @@ console.log('Lesson 6')
 // Можно ли создать метод на экземпляре класса который будет удалять сам экземпляр класса?
 // Можно ли создать метод класса который будет удалять экземпляр класса?
 
-class Test {
-  a: any
-  b: any
-  constructor(a = 1, b = 0) {
-    this.a = a
-    this.b = b
-  }
-}
-class Point {
-  x = 10
-  y = 5
-}
-console.log(new Test(3, 2))
+// class Test {
+//   a: any
+//   b: any
+//   constructor(a = 1, b = 0) {
+//     this.a = a
+//     this.b = b
+//   }
+// }
+// class Point {
+//   x = 10
+//   y = 5
+// }
+// console.log(new Test(3, 2))
 
 // Task 03
 // Составить описание класса для представления времени. Предусмотреть возможности установки времени и изменения его отдельных
@@ -116,6 +116,75 @@ console.log(new Test(3, 2))
 // Создать методы изменения времени на заданное количество часов, минут и секунд.
 // Создать метод выводящий время в строке формата HH:MM:SS
 // Создать класс по вышеуказанному описанию
+
+interface ITime {
+  _hours: string
+  _minutes: string
+  _seconds: string
+  _time: string
+}
+
+class Time implements ITime {
+  _hours: string
+  _minutes: string
+  _seconds: string
+  _time: string
+  constructor(hours = '00', minutes = '00', seconds = '00') {
+    this._hours = hours
+    this._minutes = minutes
+    this._seconds = seconds
+    this._time = `${this._hours}:${this._minutes}:${this._seconds}`
+  }
+  get time() {
+    return this._time
+  }
+  set time(t: string) {
+    if (/^(2[0-3]|[0-1][\d]):[0-5][\d]:[0-5][\d]$/.test(t)) {
+      this._time = t
+    } else {
+      console.warn('invalid time format')
+    }
+  }
+  get hours() {
+    return this._hours
+  }
+  set hours(hs: string) {
+    if (/^(2[0-3]|[0-1][\d])$/.test(hs)) {
+      this._hours = hs
+    } else {
+      console.warn('invalid hours format')
+    }
+  }
+  get minutes() {
+    return this._minutes
+  }
+  set minutes(ms: string) {
+    if (/^([0-5][\d])$/.test(ms)) {
+      this._minutes = ms
+    } else {
+      console.warn('invalid minutes format')
+    }
+  }
+  get seconds() {
+    return this._seconds
+  }
+  set seconds(sec: string) {
+    if (/^([0-5][\d])$/.test(sec)) {
+      this.seconds = sec
+    } else {
+      console.warn('invalid minutes format')
+    }
+  }
+  showTime() {
+    // console.log(this.time)
+    return this.time
+  }
+}
+
+const t = new Time('10', '10')
+console.log(t.showTime())
+t.time = '20:20:20'
+console.log(t.showTime())
 
 // Task 04
 // Класс Покупатель: Фамилия, Имя, Адрес, Номер банковского счета;
