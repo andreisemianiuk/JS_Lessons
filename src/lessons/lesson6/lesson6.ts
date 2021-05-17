@@ -10,51 +10,83 @@ console.log('Lesson 6')
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
 
-class Student {
+interface IStudent {
   name: string
   lastName: string
+  group: number
   academicPerformance: number[]
-  constructor(name: string, lastName: string, academicPerformance: number[]) {
+  averageMark: number
+}
+
+class Student implements IStudent {
+  name: string
+  lastName: string
+  group: number
+  academicPerformance: number[]
+  averageMark: number
+
+  constructor(
+    name: string,
+    lastName: string,
+    group: number,
+    academicPerformance: number[]
+  ) {
     this.name = name
     this.lastName = lastName
+    this.group = group
     this.academicPerformance = academicPerformance
+    this.averageMark = +this.academicPerformance
+      .reduce((sum, mark) => (sum + mark) / this.academicPerformance.length)
+      .toFixed(2)
+  }
+  private static sortStudents(s1: IStudent, s2: IStudent) {
+    if (s1.averageMark > s2.averageMark) {
+      return 1
+    } else if (s1.averageMark < s2.averageMark) {
+      return -1
+    } else {
+      return 0
+    }
+  }
+  static sort(arr: IStudent[]) {
+    return [...arr].sort(this.sortStudents)
+  }
+  private static isMarksNineOrTen(arr: number[]) {
+    return arr.every(m => m === 9 || m === 10)
+  }
+  private static filterStudents(arr: IStudent[]) {
+    let res: IStudent[] = []
+    arr.forEach(st => {
+      if (this.isMarksNineOrTen(st.academicPerformance)) {
+        res.push(st)
+      }
+    })
+    return res
+  }
+  static printGoodStudents(arr: IStudent[]) {
+    this.filterStudents(arr).forEach(st => {
+      console.log(`Student - ${st.name}, Group - ${st.group}`)
+    })
   }
 }
 
-let student1 = new Student('Andrey', 'Semenyuk', [10, 10, 10, 10, 10])
-let student2 = new Student('Ihar', 'Luschchyk', [9, 10, 9, 10, 9])
-let student3 = new Student('Vika', 'Kushnerevich', [8, 10, 7, 10, 9])
-let student4 = new Student('Evgen', 'Ivanuyk', [8, 7, 9, 8, 8])
-let student5 = new Student('Ilya', 'Kim', [4, 5, 7, 8, 9])
-let student6 = new Student('Egor', 'Krid', [3, 3, 4, 4, 5])
-let student7 = new Student('Vasya', 'Vakulenko', [3, 4, 8, 8, 7])
-let student8 = new Student('Sergey', 'Shnurov', [2, 1, 3, 3, 2])
-let student9 = new Student('Oleg', 'Mayami', [1, 2, 1, 2, 3])
-let student10 = new Student('Viktor', 'Drobysh', [2, 3, 5, 3, 8])
-
-let students = [
-  student1,
-  student2,
-  student3,
-  student4,
-  student5,
-  student6,
-  student7,
-  student8,
-  student9,
-  student10,
-]
-
-let mostEducatedStudents = [
-  ...students.sort(
-    (a, b) =>
-      a.academicPerformance.reduce((acc, v) => acc + v) -
-      b.academicPerformance.reduce((acc, v) => acc + v)
-  ),
-]
+let students: IStudent[] = []
+students.push(
+  new Student('Andrey', 'Semenyuk', 1, [10, 10, 10, 10, 10]),
+  new Student('Ihar', 'Luschchyk', 2, [9, 10, 9, 10, 9]),
+  new Student('Vika', 'Kushnerevich', 3, [8, 10, 7, 10, 9]),
+  new Student('Evgen', 'Ivanuyk', 3, [8, 7, 9, 8, 8]),
+  new Student('Ilya', 'Kim', 2, [4, 5, 7, 8, 9]),
+  new Student('Egor', 'Krid', 2, [3, 3, 4, 4, 5]),
+  new Student('Vasya', 'Vakulenko', 3, [3, 4, 8, 8, 7]),
+  new Student('Sergey', 'Shnurov', 1, [2, 1, 3, 3, 2]),
+  new Student('Oleg', 'Mayami', 2, [1, 2, 1, 2, 3]),
+  new Student('Viktor', 'Drobysh', 1, [2, 3, 5, 3, 8])
+)
 
 console.log(students)
-console.log(mostEducatedStudents)
+console.log(Student.sort(students))
+Student.printGoodStudents(students)
 
 // Создать массив из десяти элементов такого типа, упорядочить записи по возрастанию среднего балла.
 // Добавить возможность вывода фамилий и номеров групп студентов, имеющих оценки, равные только 4 или 5.
