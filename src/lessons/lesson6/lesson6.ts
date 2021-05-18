@@ -117,80 +117,167 @@ console.log('Lesson 6')
 // Создать метод выводящий время в строке формата HH:MM:SS
 // Создать класс по вышеуказанному описанию
 
-interface ITime {
-  _hours: string
-  _minutes: string
-  _seconds: string
-  _time: string
-}
+// interface ITime {
+//   _hours: string
+//   _minutes: string
+//   _seconds: string
+//   _time: string
+// }
 
-class Time implements ITime {
-  _hours: string
-  _minutes: string
-  _seconds: string
-  _time: string
-  constructor(hours = '00', minutes = '00', seconds = '00') {
-    this._hours = hours
-    this._minutes = minutes
-    this._seconds = seconds
-    this._time = `${this._hours}:${this._minutes}:${this._seconds}`
-  }
-  get time() {
-    return this._time
-  }
-  set time(t: string) {
-    if (/^(2[0-3]|[0-1][\d]):[0-5][\d]:[0-5][\d]$/.test(t)) {
-      this._time = t
-    } else {
-      console.warn('invalid time format')
-    }
-  }
-  get hours() {
-    return this._hours
-  }
-  set hours(hs: string) {
-    if (/^(2[0-3]|[0-1][\d])$/.test(hs)) {
-      this._hours = hs
-    } else {
-      console.warn('invalid hours format')
-    }
-  }
-  get minutes() {
-    return this._minutes
-  }
-  set minutes(ms: string) {
-    if (/^([0-5][\d])$/.test(ms)) {
-      this._minutes = ms
-    } else {
-      console.warn('invalid minutes format')
-    }
-  }
-  get seconds() {
-    return this._seconds
-  }
-  set seconds(sec: string) {
-    if (/^([0-5][\d])$/.test(sec)) {
-      this.seconds = sec
-    } else {
-      console.warn('invalid minutes format')
-    }
-  }
-  showTime() {
-    // console.log(this.time)
-    return this.time
-  }
-}
+// class Time implements ITime {
+//   _hours: string
+//   _minutes: string
+//   _seconds: string
+//   _time: string
+//   constructor(hours = '00', minutes = '00', seconds = '00') {
+//     this._hours = hours
+//     this._minutes = minutes
+//     this._seconds = seconds
+//     this._time = `${this._hours}:${this._minutes}:${this._seconds}`
+//   }
+//   get time() {
+//     return this._time
+//   }
+//   set time(t: string) {
+//     if (/^(2[0-3]|[0-1][\d]):[0-5][\d]:[0-5][\d]$/.test(t)) {
+//       this._time = t
+//     } else {
+//       console.warn('invalid time format')
+//     }
+//   }
+//   get hours() {
+//     return this._hours
+//   }
+//   set hours(hs: string) {
+//     if (/^(2[0-3]|[0-1][\d])$/.test(hs)) {
+//       this._hours = hs
+//     } else {
+//       console.warn('invalid hours format')
+//     }
+//   }
+//   get minutes() {
+//     return this._minutes
+//   }
+//   set minutes(ms: string) {
+//     if (/^([0-5][\d])$/.test(ms)) {
+//       this._minutes = ms
+//     } else {
+//       console.warn('invalid minutes format')
+//     }
+//   }
+//   get seconds() {
+//     return this._seconds
+//   }
+//   set seconds(sec: string) {
+//     if (/^([0-5][\d])$/.test(sec)) {
+//       this.seconds = sec
+//     } else {
+//       console.warn('invalid minutes format')
+//     }
+//   }
+//   showTime() {
+//     // console.log(this.time)
+//     return this.time
+//   }
+// }
 
-const t = new Time('10', '10')
-console.log(t.showTime())
-t.time = '20:20:20'
-console.log(t.showTime())
+// const t = new Time('10', '10')
+// console.log(t.showTime())
+// t.time = '20:20:20'
+// console.log(t.showTime())
 
 // Task 04
 // Класс Покупатель: Фамилия, Имя, Адрес, Номер банковского счета;
 // Методы: установка значений атрибутов, получение значений атрибутов, вывод информации.
 // Создать массив объектов данного класса.
 // Вывести список покупателей в алфавитном порядке и список покупателей, у которых номер кредитной карточки находится в заданном диапазоне.
+
+interface IPurchaser {
+  name: string
+  lastName: string
+  address: string
+  bankAccountNumber: number
+}
+
+class Purchaser implements IPurchaser {
+  private _name: string
+  private _lastName: string
+  private _address: string
+  private _bankAccountNumber: number
+
+  constructor(
+    name: string,
+    lastName: string,
+    address: string,
+    bankAccountNumber: number
+  ) {
+    this._name = name
+    this._lastName = lastName
+    this._address = address
+    this._bankAccountNumber = bankAccountNumber
+  }
+
+  get name() {
+    return this._name
+  }
+  set name(n) {
+    this._name = n
+  }
+  get lastName() {
+    return this._lastName
+  }
+  set lastName(n) {
+    this._lastName = n
+  }
+  get address() {
+    return this._address
+  }
+  set address(a) {
+    this._address = a
+  }
+  get bankAccountNumber() {
+    return this._bankAccountNumber
+  }
+  set bankAccountNumber(n) {
+    this._bankAccountNumber = n
+  }
+  showPurchaser() {
+    console.log(
+      `${this.name} ${this.lastName}, ${this.address}, account: ${this.bankAccountNumber}`
+    )
+  }
+  private static sortByName(p1: IPurchaser, p2: IPurchaser) {
+    if (p1.name > p2.name) {
+      return 1
+    } else if (p1.name < p2.name) {
+      return -1
+    } else {
+      return 0
+    }
+  }
+  static showSortedPurchasers(arr: IPurchaser[]) {
+    console.log([...arr].sort(this.sortByName))
+  }
+  private static isAccountFormat(account: number) {
+    return /^[\d]{8}$/.test(account.toString())
+  }
+  static showPurchasersWithCorrectFormatAccontNumber(arr: IPurchaser[]) {
+    const a = arr.filter(p => this.isAccountFormat(p.bankAccountNumber))
+    console.log(a)
+  }
+}
+
+const purchasers: IPurchaser[] = []
+purchasers.push(
+  new Purchaser('sergey', 'tzarikevich', 'Nemiga 3-2', 99999999),
+  new Purchaser('andrey', 'semenyuk', 'Zhynovich 20-11', 77777777),
+  new Purchaser('ihar', 'lushchyk', 'Chkalova 9-43', 22222222),
+  new Purchaser('vika', 'kushnerevich', 'Zhynovich 20-11', 3333333333)
+)
+console.log(purchasers)
+
+Purchaser.showSortedPurchasers(purchasers)
+Purchaser.showPurchasersWithCorrectFormatAccontNumber(purchasers)
 
 // Task 05
 // Создать класс машина - имеющий марку, число цилиндров, мощность. Определить конструктор и функцию печати.
