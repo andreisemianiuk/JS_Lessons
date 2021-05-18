@@ -192,97 +192,149 @@ console.log('Lesson 6')
 // Создать массив объектов данного класса.
 // Вывести список покупателей в алфавитном порядке и список покупателей, у которых номер кредитной карточки находится в заданном диапазоне.
 
-interface IPurchaser {
-  name: string
-  lastName: string
-  address: string
-  bankAccountNumber: number
-}
+// interface IPurchaser {
+//   name: string
+//   lastName: string
+//   address: string
+//   bankAccountNumber: number
+// }
 
-class Purchaser implements IPurchaser {
-  private _name: string
-  private _lastName: string
-  private _address: string
-  private _bankAccountNumber: number
+// class Purchaser implements IPurchaser {
+//   private _name: string
+//   private _lastName: string
+//   private _address: string
+//   private _bankAccountNumber: number
 
-  constructor(
-    name: string,
-    lastName: string,
-    address: string,
-    bankAccountNumber: number
-  ) {
-    this._name = name
-    this._lastName = lastName
-    this._address = address
-    this._bankAccountNumber = bankAccountNumber
-  }
+//   constructor(
+//     name: string,
+//     lastName: string,
+//     address: string,
+//     bankAccountNumber: number
+//   ) {
+//     this._name = name
+//     this._lastName = lastName
+//     this._address = address
+//     this._bankAccountNumber = bankAccountNumber
+//   }
 
-  get name() {
-    return this._name
-  }
-  set name(n) {
-    this._name = n
-  }
-  get lastName() {
-    return this._lastName
-  }
-  set lastName(n) {
-    this._lastName = n
-  }
-  get address() {
-    return this._address
-  }
-  set address(a) {
-    this._address = a
-  }
-  get bankAccountNumber() {
-    return this._bankAccountNumber
-  }
-  set bankAccountNumber(n) {
-    this._bankAccountNumber = n
-  }
-  showPurchaser() {
-    console.log(
-      `${this.name} ${this.lastName}, ${this.address}, account: ${this.bankAccountNumber}`
-    )
-  }
-  private static sortByName(p1: IPurchaser, p2: IPurchaser) {
-    if (p1.name > p2.name) {
-      return 1
-    } else if (p1.name < p2.name) {
-      return -1
-    } else {
-      return 0
-    }
-  }
-  static showSortedPurchasers(arr: IPurchaser[]) {
-    console.log([...arr].sort(this.sortByName))
-  }
-  private static isAccountFormat(account: number) {
-    return /^[\d]{8}$/.test(account.toString())
-  }
-  static showPurchasersWithCorrectFormatAccontNumber(arr: IPurchaser[]) {
-    const a = arr.filter(p => this.isAccountFormat(p.bankAccountNumber))
-    console.log(a)
-  }
-}
+//   get name() {
+//     return this._name
+//   }
+//   set name(n) {
+//     this._name = n
+//   }
+//   get lastName() {
+//     return this._lastName
+//   }
+//   set lastName(n) {
+//     this._lastName = n
+//   }
+//   get address() {
+//     return this._address
+//   }
+//   set address(a) {
+//     this._address = a
+//   }
+//   get bankAccountNumber() {
+//     return this._bankAccountNumber
+//   }
+//   set bankAccountNumber(n) {
+//     this._bankAccountNumber = n
+//   }
+//   showPurchaser() {
+//     console.log(
+//       `${this.name} ${this.lastName}, ${this.address}, account: ${this.bankAccountNumber}`
+//     )
+//   }
+//   private static sortByName(p1: IPurchaser, p2: IPurchaser) {
+//     if (p1.name > p2.name) {
+//       return 1
+//     } else if (p1.name < p2.name) {
+//       return -1
+//     } else {
+//       return 0
+//     }
+//   }
+//   static showSortedPurchasers(arr: IPurchaser[]) {
+//     console.log([...arr].sort(this.sortByName))
+//   }
+//   private static isAccountFormat(account: number) {
+//     return /^[\d]{8}$/.test(account.toString())
+//   }
+//   static showPurchasersWithCorrectFormatAccontNumber(arr: IPurchaser[]) {
+//     const a = arr.filter(p => this.isAccountFormat(p.bankAccountNumber))
+//     console.log(a)
+//   }
+// }
 
-const purchasers: IPurchaser[] = []
-purchasers.push(
-  new Purchaser('sergey', 'tzarikevich', 'Nemiga 3-2', 99999999),
-  new Purchaser('andrey', 'semenyuk', 'Zhynovich 20-11', 77777777),
-  new Purchaser('ihar', 'lushchyk', 'Chkalova 9-43', 22222222),
-  new Purchaser('vika', 'kushnerevich', 'Zhynovich 20-11', 3333333333)
-)
-console.log(purchasers)
+// const purchasers: IPurchaser[] = []
+// purchasers.push(
+//   new Purchaser('sergey', 'tzarikevich', 'Nemiga 3-2', 99999999),
+//   new Purchaser('andrey', 'semenyuk', 'Zhynovich 20-11', 77777777),
+//   new Purchaser('ihar', 'lushchyk', 'Chkalova 9-43', 22222222),
+//   new Purchaser('vika', 'kushnerevich', 'Zhynovich 20-11', 3333333333)
+// )
+// console.log(purchasers)
 
-Purchaser.showSortedPurchasers(purchasers)
-Purchaser.showPurchasersWithCorrectFormatAccontNumber(purchasers)
+// Purchaser.showSortedPurchasers(purchasers)
+// Purchaser.showPurchasersWithCorrectFormatAccontNumber(purchasers)
 
 // Task 05
 // Создать класс машина - имеющий марку, число цилиндров, мощность. Определить конструктор и функцию печати.
 // Создать производный класс – грузовик, имеющий грузоподъемность кузова.
 // Определить функции переназначения марки и грузоподъемности.
+
+interface ICar {
+  model: string
+  cylinderCount: number
+  power: number
+}
+interface ITruck {
+  liftingCapacity: number
+}
+class Car implements ICar {
+  model: string
+  cylinderCount: number
+  power: number
+  constructor(model: string, cylinderCount: number, power: number) {
+    this.model = model
+    this.cylinderCount = cylinderCount
+    this.power = power
+  }
+  get modelName() {
+    return this.model
+  }
+  set modelName(m) {
+    this.model = m
+  }
+  showCar() {
+    console.log(
+      `model: ${this.model}, cylinderCount: ${this.cylinderCount}, power: ${this.power}`
+    )
+  }
+}
+class Truck extends Car implements ITruck {
+  liftingCapacity: number
+  constructor(
+    model: string,
+    cylinderCount: number,
+    power: number,
+    liftingCapacity: number
+  ) {
+    super(model, power, cylinderCount)
+    this.liftingCapacity = liftingCapacity
+  }
+  get liftingCapacityValue() {
+    return this.liftingCapacity
+  }
+  set liftingCapacityValue(c) {
+    this.liftingCapacity = c
+  }
+}
+
+let tesla = new Car('Tesla', 10, 1000)
+let zil = new Truck('ZIL', 50, 3000, 10000)
+tesla.showCar()
 
 // just a plug
 export default () => {}
