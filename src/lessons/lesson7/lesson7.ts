@@ -53,17 +53,36 @@ class Monkey extends Animal {
   }
 }
 
-let monkey = new Monkey()
-monkey.eat()
-monkey.walk()
-monkey.sleep()
-monkey.roar()
-monkey.climb()
+// let monkey = new Monkey()
+// monkey.eat()
+// monkey.walk()
+// monkey.sleep()
+// monkey.roar()
+// monkey.climb()
 
 //Task 03
 // Реализовать класс Human на базе класса Monkey, конструктор принимает name(по умолчанию 'Human') в качестве
 // параметра, реализовать методы speak и think аналогично классу Animal
 // проверить, что все методы работают
+
+class Human extends Monkey {
+  name: string
+  constructor(name = 'Human') {
+    super()
+    this.name = name
+  }
+  speak() {
+    console.log(`${this.name} speaking`)
+  }
+  think() {
+    console.log(`${this.name} thinking`)
+  }
+}
+
+let man = new Human()
+man.speak()
+man.think()
+man.eat()
 
 // Task 04
 // Реализовать таски 01-03 через функции конструкторы в отдельном JS файле, реализовать наследование
