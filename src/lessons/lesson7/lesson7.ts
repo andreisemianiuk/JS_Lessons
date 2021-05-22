@@ -79,10 +79,10 @@ class Human extends Monkey {
   }
 }
 
-let man = new Human()
-man.speak()
-man.think()
-man.eat()
+// let man = new Human()
+// man.speak()
+// man.think()
+// man.eat()
 
 // Task 04
 // Реализовать таски 01-03 через функции конструкторы в отдельном JS файле, реализовать наследование
