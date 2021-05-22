@@ -39,7 +39,7 @@ class Animal {
 // параметра, реализовать методы roar и climb аналогично классу Animal
 // проверить, что все методы работают
 
-class Cat extends Animal {
+class Monkey extends Animal {
   name: string
   constructor(name = 'Monkey') {
     super()
@@ -53,7 +53,7 @@ class Cat extends Animal {
   }
 }
 
-let monkey = new Cat('Multik')
+let monkey = new Monkey()
 monkey.eat()
 monkey.walk()
 monkey.sleep()
