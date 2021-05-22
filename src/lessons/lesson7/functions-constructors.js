@@ -74,4 +74,21 @@ console.log('lesson 7, functions-constructors')
 // man.think()
 // man.speak()
 
+// Task 05
+// Используя метод Apply реализовать свой собственный метод bind
+
+Function.prototype.customBind = function (ctx, ...args) {
+  const that = this
+  return function (...args2) {
+    return that.call(ctx, ...args, ...args2)
+  }
+}
+
+Function.prototype.customBind = function (ctx, ...args) {
+  ctx.___someValue___ = this
+  return function (...args2) {
+    return ctx.___someValue___(...args, ...args2)
+  }
+}
+
 export default () => {}
