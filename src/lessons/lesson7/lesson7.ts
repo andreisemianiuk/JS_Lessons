@@ -34,15 +34,31 @@ class Animal {
   }
 }
 
-let bear = new Animal('Bear')
-bear.eat()
-bear.walk()
-bear.sleep()
-
 //Task 02
 // Реализовать класс Monkey на базе класса Animal,  конструктор принимает name(по умолчанию 'Monkey') в качестве
 // параметра, реализовать методы roar и climb аналогично классу Animal
 // проверить, что все методы работают
+
+class Cat extends Animal {
+  name: string
+  constructor(name = 'Monkey') {
+    super()
+    this.name = name
+  }
+  roar() {
+    console.log(`${this.name} roaring`)
+  }
+  climb() {
+    console.log(`${this.name} climbing`)
+  }
+}
+
+let monkey = new Cat('Multik')
+monkey.eat()
+monkey.walk()
+monkey.sleep()
+monkey.roar()
+monkey.climb()
 
 //Task 03
 // Реализовать класс Human на базе класса Monkey, конструктор принимает name(по умолчанию 'Human') в качестве
